@@ -17,20 +17,15 @@ def login(request):
 
 def register(request):
     form = RegisterForm(request.POST)
-    if form.is_valid():
-        username = form.cleaned_data['username']
-        user = BlogUser.objects.get(username=username)
-        if user is not None:
-            messages.error(request, '用户已存在')
-            return render(request, 'register.html', context={
-                'form':form
-            })
-        else:
-            user = form.save(False)
-            user.save(True)
-            url = reverse('myblog:login')
-            return HttpResponseRedirect(url)
-    else:
+    if request.method == 'GET':
         return render(request, 'register.html', context={
-            'form': RegisterForm()
-        })
+            'form': RegisterForm()})
+    else:
+        if form.is_valid():
+            user = form.save(True)
+            url = '/login'
+            return HttpResponseRedirect(url)
+        else:
+            return render(request, 'register.html', context={
+                'form': form
+            })

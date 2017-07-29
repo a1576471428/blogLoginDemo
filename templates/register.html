@@ -50,24 +50,28 @@
                             }
                         }
                     },
-                    password: {
+                    password1: {
                         validators: {
                             notEmpty: {
                                 message: '请输入密码'
                             },
                             identical: {
-                                field: 'passwordAgain',
+                                field: 'password2',
                                 message: '两次密码输入不一致'
+                            },
+                            stringLength: {
+                                min: 8,
+                                message: '密码最少是八位的'
                             }
                         }
                     },
-                    passwordAgain: {
+                    password2: {
                         validators: {
                             notEmpty: {
                                 message: '请再次输入密码'
                             },
                             identical: {
-                                field: 'password',
+                                field: 'password1',
                                 message: '两次密码输入不一致'
                             }
                         }
