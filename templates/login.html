@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% load bootstrap3 %}
+
+{% block title %}
+    登录页面
+{% endblock %}
+
+{% block head %}
+    <link href="/static/css/bootstrapValidator.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="text-center">用户登录</h1>
+    {% autoescape off %}{% bootstrap_messages %}{% endautoescape %}
+    <form id="user_login_form" role="form" class="form-horizontal" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout="horizontal" %}
+        {% buttons submit='提交' reset='取消' layout='horizontal' %}{% endbuttons %}
+    </form>
+
+{% endblock %}
+{% block scripts %}
+     <script type="text/javascript" src="/static/js/bootstrapValidator.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#user_login_form').bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                fields:{
+                    username:{
+                        group: '.col-lg-4',
+                        validators: {
+                            notEmpty: {
+                                message: '请填写用户名'
+                            }
+                        }
+                    },
+                    password1: {
+                        validators: {
+                            notEmpty: {
+                                message: '请输入密码'
+                            },
+                            stringLength: {
+                                min: 8,
+                                message: '密码最少是八位的'
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

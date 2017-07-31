@@ -16,10 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from .views import *
-from myauth.views import login, register
+from myauth.views import login, register, logout
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^$', hello),
-    url(r'', include('myauth.urls', namespace='myauth', app_name='myauth'))
+    url(r'^login/', login, name='login'),
+    url(r'^register/', register, name='register'),
+    url(r'^logout/', logout, name='logout')
 ]

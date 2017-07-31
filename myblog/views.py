@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 @login_required
 def hello(request):
-    return HttpResponse("helloWorld")
+    return render(request, 'hello.html')
