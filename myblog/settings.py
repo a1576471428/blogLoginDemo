@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import sys
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -24,6 +26,7 @@ SECRET_KEY = '5ci(txn5)@wzwsxxw0jf7kj#)!$6c24utk^4y+47_-&bkrl)i8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 ALLOWED_HOSTS = []
 
@@ -56,7 +59,7 @@ ROOT_URLCONF = 'myblog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR+"/templates",],
+        'DIRS': [os.path.join(BASE_DIR,  'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,9 +111,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -127,7 +130,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "common_static"),
 )
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR,  '/templates'),)
+TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
 
 BOOTSTRAP3 = {
 

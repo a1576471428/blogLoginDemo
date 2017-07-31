@@ -5,5 +5,4 @@ from django.contrib.auth.models import User
 from myauth.models import BlogUser
 
 
-
 admin.site.register(BlogUser)

@@ -27,8 +27,15 @@ class RegisterForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ("username", )
+        fields = ("username",)
 
+    def save(self, commit=True):
+        user = super(RegisterForm, self).save(commit=False)
+        user.phone = self.cleaned_data["phone"]
+        user.email = self.cleaned_data["email"]
+        if commit:
+            user.save()
+        return user
 class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)

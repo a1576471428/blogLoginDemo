@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -34,7 +35,7 @@ def register(request):
     else:
         form = RegisterForm(request.POST)
         if form.is_valid(): #RegisterForm继承了UserCreationForm， 会完成用户密码强度检查，用户是否存在的验证
-            user = form.save(True) #认证通过。直接保存到数据库
+            form.save(True) #认证通过。直接保存到数据库
             url = reverse('myauth:login')
             return HttpResponseRedirect(url)
         else:
