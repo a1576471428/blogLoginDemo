@@ -13,7 +13,7 @@ from myauth.models import BlogUser
 
 def login(request):
     if request.method == 'GET':
-        return render(request, 'login.html', context={
+        return render(request, 'auth/login.html', context={
             'form':LoginForm
         })
     else:
@@ -23,14 +23,14 @@ def login(request):
             redirect_to = request.GET.get('next', '/') #重定向到要访问的地址，没有的话重定向到首页
             return HttpResponseRedirect(redirect_to)
         else: #认证失败
-            return render(request, 'login.html', context={
+            return render(request, 'auth/login.html', context={
                 'form':form
             })
 
 
 def register(request):
     if request.method == 'GET':
-        return render(request, 'register.html', context={
+        return render(request, 'auth/register.html', context={
             'form': RegisterForm()})
     else:
         form = RegisterForm(request.POST)
@@ -39,7 +39,7 @@ def register(request):
             url = reverse('myauth:login')
             return HttpResponseRedirect(url)
         else:
-            return render(request, 'register.html', context={
+            return render(request, 'auth/register.html', context={
                 'form': form
             })
 

@@ -21,3 +21,4 @@ class AuthTest(TestCase):
             'phone':'13333333333',
         })
         self.assertEqual(1, len(BlogUser.objects.filter(email='user123@user.com')))
+
