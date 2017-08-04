@@ -17,14 +17,21 @@
     <form id="user_login_form" role="form" class="form-horizontal" method="post">
         {% csrf_token %}
         {% bootstrap_form form layout="horizontal" %}
+        <div class="form-group">
+            <div class="col-md-1 col-sm-offset-3">
+                <input type="checkbox" class="form-control" name="remember-me" value="remember-me" id="remember-me">
+            </div>
+            <label for="remember-me" class=" control-label">记住我</label>
+
+        </div>
         {% buttons submit='提交' reset='取消' layout='horizontal' %}{% endbuttons %}
     </form>
 
 {% endblock %}
 {% block scripts %}
-     <script type="text/javascript" src="/static/js/bootstrapValidator.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrapValidator.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#user_login_form').bootstrapValidator({
                 message: 'This value is not valid',
                 feedbackIcons: {
@@ -32,8 +39,8 @@
                     invalid: 'glyphicon glyphicon-remove',
                     validating: 'glyphicon glyphicon-refresh'
                 },
-                fields:{
-                    username:{
+                fields: {
+                    username: {
                         group: '.col-lg-4',
                         validators: {
                             notEmpty: {

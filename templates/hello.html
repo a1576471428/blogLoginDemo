@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-{% if request.user.is_authenticated %}
-    {{ request.user.username }}
-{% endif %}
-<h1>你好世界</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% block title %}
+    欢迎页面
+{% endblock %}
+{% block content %}
+    <h1>hello world</h1>
+{% endblock %}
